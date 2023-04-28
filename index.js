@@ -1,6 +1,5 @@
 const mongoose=require("mongoose")
 const express=require("express")
-require("dotenv").config()
 const { connection } = require("./controllers/connection")
 const { route } = require("./routes/user.route")
 const { notes } = require("./routes/notes.router")
@@ -16,7 +15,7 @@ app.use("/",notes)
 
 
 
-app.listen(process.env.port,async()=>{
+app.listen(8080,async()=>{
     try {
         await connection
 console.log("connected")
