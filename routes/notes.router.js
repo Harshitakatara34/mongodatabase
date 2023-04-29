@@ -2,16 +2,18 @@ const express=require("express")
 const { NoteModel } = require("../Model/notes.model")
 const notes=express.Router()
 
-notes.post("/create",async(req,res)=>{
-try {
-    const{title,author}=req.body
-    const note=new NoteModel(req.body)
-    await note.save()
-    res.send("notes addded")
-} catch (error) {
-    res.send(error)
-}
-})
+
+notes.post("/create", async (req, res) => {
+  try {
+    const { title, author } = req.body;
+    const note = new NoteModel(req.body);
+    await note.save();
+    res.json({ message: "notes added" }); // Return a JSON object
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 
 notes.get("/notes",async(req,res)=>{
     try {
