@@ -36,14 +36,14 @@ notes.delete("/notes/:id", async (req, res) => {
   
       if (!note) {
         // If the note doesn't exist or the authorId is incorrect, send a 404 status
-        return res.status(404).send({ error: "Note not found" });
+        return res.status(404).json({ error: "Note not found" });
       }
   
       // Delete the note and send a success response
       await NoteModel.findByIdAndDelete(id);
       res.send({ message: "Note deleted successfully" });
     } catch (error) {
-      res.status(500).send({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
   });
 
@@ -53,14 +53,14 @@ notes.patch("/notes/:id",async(req,res)=>{
         const{authorId}=req.body
         const note=await NoteModel.findOne({_id:id,authorId})
      if(!note){
-        res.send("Note not found")
+        res.json({msg:"Note not found"})
      }
      else{
         await NoteModel.findByIdAndUpdate(id,req.body)
-        res.send("Notes Updated")
+        res.json({msg:"Note Updated"})
      }
     } catch (error) {
-        res.send(error)
+        res.json({msg:error})
     }
 })
 
